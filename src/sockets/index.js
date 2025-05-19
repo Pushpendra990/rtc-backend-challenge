@@ -1,5 +1,5 @@
 const { Server } = require("socket.io");
-
+const driverState = require('../data/driverState');
 const setupSocket = (httpServer) => {
   const io = new Server(httpServer, {
     cors: { origin: '*' }
@@ -10,7 +10,7 @@ const setupSocket = (httpServer) => {
   dashboardNamespace.on('connection', socket => {
     console.log("Connected to /driver/dashboard");
 
-    let trackedDriver = 'driver1';
+    let trackedDriver = '';
 
     socket.on('listenToDriver', ({ driverId }) => {
       trackedDriver = driverId;
